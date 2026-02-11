@@ -2,6 +2,7 @@ import './styles/App.css';
 import {useEffect, useState} from "react";
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import {LanguageProvider} from "./context/LanguageContext";
+import './styles/theme.module.css'
 import {ThemeProvider} from "./context/ThemeContext";
 
 function App() {
