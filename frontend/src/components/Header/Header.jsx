@@ -3,6 +3,7 @@ import style from './header.module.css';
 import { useTranslation } from "react-i18next";
 import {ThemeContext} from "../../context/ThemeContext";
 import {LanguageContext} from "../../context/LanguageContext";
+import {Link} from "react-router-dom";
 
 function Header() {
     const { t } = useTranslation();
@@ -16,7 +17,8 @@ function Header() {
             <span className={style.accent}>AI</span>
             </h2>
             <hr/>
-            {/*Links*/}
+            <Link className={style.link} to='/'>{t("home")}</Link>
+            <Link className={style.link} to='/fanfics'>{t("fanfics")}</Link>
             <div className={style.settings}>
                 <button onClick={toggleLanguage}>{lang.toUpperCase()}</button>
                 <hr/>
