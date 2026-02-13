@@ -7,6 +7,7 @@ import {ThemeProvider} from "./context/ThemeContext";
 import Header from "./components/Header/Header";
 import MainPage from "./pages/MainPage";
 import FanficsPage from "./pages/FanficsPage";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const [data, setData] = useState(null);
@@ -28,6 +29,7 @@ function App() {
                   <Route path='/' element={<MainPage />}></Route>
                   <Route path='/fanfics' element={<FanficsPage />}></Route>
               </Routes>
+              <Footer />
           </BrowserRouter>
         </ThemeProvider>
       </LanguageProvider>

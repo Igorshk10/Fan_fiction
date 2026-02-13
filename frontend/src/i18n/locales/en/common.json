@@ -1,5 +1,20 @@
 {
-  "home": "Home",
-  "fanfics" : "Fanfics",
-  "account" : "Account"
+  "header" : {
+    "home": "Home",
+    "fanfics" : "Fanfics",
+    "account" : "Account"
+  },
+  "footer": {
+    "slogan" : "A platform where imagination becomes stories",
+
+    "aboutTitle": "About",
+    "aboutUs": "About Us",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+
+    "journeyTitle": "Our Journey",
+    "story": "Our Story",
+    "roadmap": "Roadmap",
+    "community": "Community"
+  }
 }

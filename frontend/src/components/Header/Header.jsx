@@ -19,15 +19,15 @@ function Header() {
 
             </p>
             <hr/>
-            <Link className={style.link} to='/'>{t("home")}</Link>
-            <Link className={style.link} to='/fanfics'>{t("fanfics")}</Link>
+            <Link className={style.link} to='/'>{t("header.home")}</Link>
+            <Link className={style.link} to='/fanfics'>{t("header.fanfics")}</Link>
             <div className={style.settings}>
                 <button className={style["button-toggle"]} onClick={toggleLanguage}>{lang === 'en' ? "UA"  : "EN"}</button>
                 <hr/>
                 <button className={style["button-toggle"]} onClick={toggleTheme}>
                     {theme == 'light' ? <i className='bx bx-moon'></i> : <i className='bx bx-sun'></i>}
                 </button>
-                <button className={style['account-btn']}>{t("account")}</button>
+                <button className={style['account-btn']}>{t("header.account")}</button>
             </div>
             <button className={style.menu} onClick={() => setIsOpen(prev => !prev)}>{isOpen ? <i className='bx bx-x'></i> : <i className='bx bx-menu'></i>}</button>
         </header>
