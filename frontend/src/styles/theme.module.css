@@ -1,12 +1,11 @@
 /* Titan One */
 @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
-/* M PLUS Rounded 1c */
-@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap');
-
+/* Nunito */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 :root {
     --main-color: #a413f8;
     --logo-font : "Titan One", sans-serif ;
-    --main-font : "M PLUS Rounded 1c", sans-serif;
+    --main-font : "Nunito", sans-serif;
     --gary-white: #636363;
     --white-dark : #ffffff;
     --input-bg : #f3f3f3;
@@ -17,7 +16,7 @@
 [data-theme="dark"] {
     --main-color: #a413f8;
     --logo-font : "Titan One", sans-serif ;
-    --main-font : "M PLUS Rounded 1c", sans-serif;
+    --main-font : "Nunito", sans-serif;
     --gary-white: #ffffff;
     --white-dark : #1b1b1b;
     --input-bg : #ffffff;
