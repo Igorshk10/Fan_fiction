@@ -4,6 +4,10 @@ import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import {LanguageProvider} from "./context/LanguageContext";
 import './styles/theme.module.css'
 import {ThemeProvider} from "./context/ThemeContext";
+import Header from "./components/Header/Header";
+import MainPage from "./pages/MainPage";
+import FanficsPage from "./pages/FanficsPage";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const [data, setData] = useState(null);
@@ -19,7 +23,13 @@ function App() {
       <LanguageProvider>
         <ThemeProvider>
           <BrowserRouter>
-            <h1>{data ? JSON.stringify(data.message) : "Loading..."}</h1>
+            {/*{<h1>{data ? JSON.stringify(data.message) : "Loading..."}</h1>}*/}
+              <Header />
+              <Routes>
+                  <Route path='/' element={<MainPage />}></Route>
+                  <Route path='/fanfics' element={<FanficsPage />}></Route>
+              </Routes>
+              <Footer />
           </BrowserRouter>
         </ThemeProvider>
       </LanguageProvider>
