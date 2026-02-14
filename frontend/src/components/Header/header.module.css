@@ -27,6 +27,7 @@
 
 .accent{
     color: var(--main-color);
+    font-family: var(--logo-font);
 }
 
 .header{
