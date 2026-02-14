@@ -16,5 +16,27 @@
     "story": "Our Story",
     "roadmap": "Roadmap",
     "community": "Community"
+  },
+  "auth" : {
+    "loginForm" : {
+      "welcome" :"Welcome",
+      "question" : "Don't have an account?",
+      "login" : "Login",
+      "forgot" : "Forgot password?",
+      "socialMedia" : "or you can login with",
+      "register" : "Register"
+    },
+    "registrationForm" : {
+      "welcomeBack" : "Welcome Back!",
+      "question" : "Have an account?",
+      "socialMedia" : "or you can register with",
+      "register" : "Register",
+      "registration": "Registration"
+    },
+    "placeholders": {
+      "username": "Username",
+      "password": "Password",
+      "email": "Email"
+    }
   }
 }

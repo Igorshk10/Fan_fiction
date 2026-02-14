@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import style from "./AuthForm.module.css";
+import {useTranslation} from "react-i18next";
 
 function AuthForm() {
     const [active, setActive] = useState(false);
+    const { t } = useTranslation();
 
     return (
         <div className={style.authWrapper}>
@@ -10,25 +12,31 @@ function AuthForm() {
 
                 <div className={`${style.formBox} ${style.login}`}>
                     <form>
-                        <h1 className={style.titan}>Login</h1>
+                        <h1 className={style.titan}>{t("auth.loginForm.login")}</h1>
 
                         <div className={style.inputBox}>
-                            <input type="text" placeholder="Username" required/>
+                            <input type="text" placeholder={t("auth.placeholders.username")} required/>
                             <i className="bx bxs-user"></i>
                         </div>
 
                         <div className={style.inputBox}>
-                            <input type="password" placeholder="Password" required/>
+                            <input type="password" placeholder={t("auth.placeholders.password")}  required/>
                             <i className="bx bxs-lock-alt"></i>
                         </div>
 
                         <div className={style.forgotLink}>
-                            <a href="#" className={style.forgotPassword}>Forgot password?</a>
+                            <a href="#" className={style.forgotPassword}>
+                                {t("auth.loginForm.forgot")}
+                            </a>
                         </div>
 
-                        <button type="submit" className={style.btn}>Log in</button>
+                        <button type="submit" className={style.btn}>
+                            {t("auth.loginForm.login")}
+                        </button>
 
-                        <p className={style.formText}>or you can log in with</p>
+                        <p className={style.formText}>
+                            {t("auth.loginForm.socialMedia")}
+                        </p>
 
                         <div className={style.socialIcons}>
                             <a href="#"><i className="bx bxl-google"></i></a>
@@ -41,26 +49,32 @@ function AuthForm() {
 
                 <div className={`${style.formBox} ${style.register}`}>
                     <form>
-                        <h1 className={style.titan}>Registration</h1>
+                        <h1 className={style.titan}>
+                            {t("auth.registrationForm.registration")}
+                        </h1>
 
                         <div className={style.inputBox}>
-                            <input type="text" placeholder="Username" required/>
+                            <input type="text" placeholder={t("auth.placeholders.username")} required/>
                             <i className="bx bxs-user"></i>
                         </div>
 
                         <div className={style.inputBox}>
-                            <input type="email" placeholder="Email" required/>
+                            <input type="email" placeholder={t("auth.placeholders.email")} required/>
                             <i className="bx bxs-envelope-open bx-flip-horizontal"></i>
                         </div>
 
                         <div className={style.inputBox}>
-                            <input type="password" placeholder="Password" required/>
+                            <input type="password" placeholder={t("auth.placeholders.password")} required/>
                             <i className="bx bxs-lock-alt"></i>
                         </div>
 
-                        <button type="submit" className={style.btn}>Register</button>
+                        <button type="submit" className={style.btn}>
+                            {t("auth.registrationForm.register")}
+                        </button>
 
-                        <p>or you can register with</p>
+                        <p className={style.formText}>
+                            {t("auth.registrationForm.socialMedia")}
+                        </p>
 
                         <div className={style.socialIcons}>
                             <a href="#"><i className="bx bxl-google"></i></a>
@@ -73,24 +87,28 @@ function AuthForm() {
 
                 <div className={style.toggleBox}>
                     <div className={`${style.togglePanel} ${style.toggleLeft} ${active ? style.activeToggleLeft : ''}`}>
-                        <h1 className={style.titan}>Welcome!</h1>
-                        <p>Don't have an account?</p>
+                        <h1 className={style.titan}>
+                            {t("auth.loginForm.welcome")}
+                        </h1>
+                        <p>{t("auth.loginForm.question")}</p>
                         <button
                             className={style.btnToggle}
                             onClick={() => setActive(true)}
                         >
-                            Register
+                            {t("auth.loginForm.register")}
                         </button>
                     </div>
 
                     <div className={`${style.togglePanel} ${style.toggleRight} ${active ? style.activeToggleRight : ''}`}>
-                        <h1 className={style.titan}>Welcome Back!</h1>
-                        <p>Have an account?</p>
+                        <h1 className={style.titan}>
+                            {t("auth.registrationForm.welcomeBack")}
+                        </h1>
+                        <p>{t("auth.registrationForm.question")}</p>
                         <button
                             className={style.btnToggle}
                             onClick={() => setActive(false)}
                         >
-                            Log in
+                            {t("auth.loginForm.login")}
                         </button>
                     </div>
                 </div>
