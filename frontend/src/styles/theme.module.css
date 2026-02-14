@@ -14,11 +14,18 @@
     --white-dark : #ffffff;
     --input-bg : #f3f3f3;
     --b-w : #000000;
+    --w-ld : #ffffff;
+    --g-ld : #f1f1f1;
+    --p-transperent: #a413f8;
+    --p-w : #a413f8;
+    --transparent-p : transperent;
+    --g-lg: #606060;
+    --gradient : linear-gradient(90deg, #efefef, #fad8ff);
 }
 
 
 [data-theme="dark"] {
-    --main-color: #a413f8;
+    --main-color: #8300cc;
     --logo-font :  "Titan One", sans-serif;
     --auth-font : "SN Pro", sans-serif;
     --main-font : "Nunito", sans-serif;
@@ -26,4 +33,11 @@
     --white-dark : #1b1b1b;
     --input-bg : #ffffff;
     --b-w : #ffffff;
+    --w-ld : #252525;
+    --g-ld : #252525;
+    --p-transperent: transperent;
+    --p-w : #ffffff;
+    --transparent-p : #a413f8 ;
+    --g-lg: #c1c1c1;
+    --gradient : linear-gradient(90deg, #303030, #312d32);
 }

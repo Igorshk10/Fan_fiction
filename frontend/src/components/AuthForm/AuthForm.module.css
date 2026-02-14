@@ -15,14 +15,14 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(90deg, #e2e2e2,#fffef6);
+    background: var(--gradient);
 }
 
 .container{
     position: relative;
     width: 850px;
     height: 550px;
-    background: #fff;
+    background: var(--white-dark);
     border-radius: 30px;
     box-shadow: 0 0 30px rgba(0,0,0,0.1);
     margin: 20px;
@@ -37,7 +37,7 @@
     width: 50%;
     display: flex;
     align-items: center;
-    color: rgb(0, 0, 0);
+    color: var(--b-w);
     text-align: center;
     z-index: 1;
     transition: 0.6s ease-in-out 1.2s, visibility 0s 1s;
@@ -80,25 +80,26 @@
 .inputBox input{
     width: 100%;
     padding: 13px 50px 13px 20px;
-    background-color: #eee;
+    background-color: var(--g-ld);
     border-radius: 8px;
     outline: none;
     border: none;
     font-size: 16px;
     font-weight: 400;
-    color: #333;
+    color: var(--gary-white);
 }
 
 .inputBox input:focus + i{
-    color : rgb(0, 0, 0);
+    color : var(--b-w);
 }
 
 .inputBox input::placeholder {
     transition: color 0.3s ease;
+    color: var(--g-lg);
 }
 
 .inputBox input:focus::placeholder {
-    color: #000000;
+    color: var(--b-w);
 }
 
 .inputBox i{
@@ -107,7 +108,7 @@
     top: 50%;
     transform: translateY(-50%);
     font-size: 20px;
-    color: #888;
+    color: var(--g-lg);
     transition: all 0.3s ease;
 }
 
@@ -117,7 +118,7 @@
 
 .forgotLink a{
     font-size: 14.5px;
-    color: #333;
+    color: var(--b-w);
     text-decoration: none;
 }
 
@@ -127,15 +128,15 @@
 
 .forgotPassword{
     font-size: 14.5px;
-    color: #333;
+    color: var(--b-w);
     text-decoration: none;
 }
 
 .btn{
     width: 100%;
     height: 48px;
-    background-color: #a413f8;
-    border: 2px solid #a413f8;
+    background-color: var(--p-transperent);
+    border: 2px solid var(--p-w);
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     cursor: pointer;
@@ -150,9 +151,9 @@
 }
 
 .btn:hover{
-    background-color: transparent;
-    border: 2px solid #a413f8;
-    color: #a413f8;
+    background-color: var(--transparent-p);
+    border: 2px solid var(--main-color);
+    color: var(--p-w);
 }
 
 .btnToggle{
@@ -171,7 +172,7 @@
 
 .btnToggle:hover{
     background-color: #fff;
-    color: #a413f8;
+    color: var(--main-color);
 }
 
 
@@ -197,7 +198,7 @@
     border: 2px solid #ccc;
     border-radius: 8px;
     font-size: 24px;
-    color: #333;
+    color: var(--gary-white);
     text-decoration: none;
     margin: 0  8px;
     transition: all 0.3s ease;
@@ -221,7 +222,7 @@
     position: absolute;
     width: 300%;
     height: 100%;
-    background: #a413f8;
+    background: var(--main-color);
     left: -250%;
     z-index: 2;
     border-radius: 150px;
@@ -236,7 +237,6 @@
     position: absolute;
     width: 50%;
     height: 100%;
-    /* background-color: seagreen; */
     color: white;
     display: flex;
     flex-direction: column;
