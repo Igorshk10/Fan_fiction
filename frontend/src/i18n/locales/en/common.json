@@ -19,7 +19,7 @@
   },
   "auth" : {
     "loginForm" : {
-      "welcome" :"Welcome",
+      "welcome" :"Welcome!",
       "question" : "Don't have an account?",
       "login" : "Login",
       "forgot" : "Forgot password?",

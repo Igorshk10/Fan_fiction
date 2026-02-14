@@ -2,9 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
 /* Nunito */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+/* Rubik Mono One */
+@import url('https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
 :root {
     --main-color: #a413f8;
-    --logo-font : "Titan One", sans-serif ;
+    --logo-font :  "Titan One", sans-serif;
+    --auth-font :"SN Pro", sans-serif;
     --main-font : "Nunito", sans-serif;
     --gary-white: #636363;
     --white-dark : #ffffff;
@@ -15,7 +19,8 @@
 
 [data-theme="dark"] {
     --main-color: #a413f8;
-    --logo-font : "Titan One", sans-serif ;
+    --logo-font :  "Titan One", sans-serif;
+    --auth-font : "SN Pro", sans-serif;
     --main-font : "Nunito", sans-serif;
     --gary-white: #ffffff;
     --white-dark : #1b1b1b;
