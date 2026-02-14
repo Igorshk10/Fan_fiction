@@ -16,5 +16,25 @@
     "story": "Наша історія",
     "roadmap": "План розвитку",
     "community": "Спільнота"
+  },
+  "auth": {
+    "loginForm": {
+      "welcome": "Ласкаво просимо!",
+      "question": "Не маєте акаунта?",
+      "login": "Увійти",
+      "forgot": "Забули пароль?",
+      "register": "Зареєструватися"
+    },
+    "registrationForm": {
+      "welcomeBack": "З поверненням!",
+      "question": "Вже маєте акаунт?",
+      "register": "Зареєструватися",
+      "registration": "Реєстрація"
+    },
+    "placeholders": {
+      "username": "Імʼя користувача",
+      "password": "Пароль",
+      "email": "Електронна пошта"
+    }
   }
 }
