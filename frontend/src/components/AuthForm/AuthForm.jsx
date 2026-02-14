@@ -12,7 +12,7 @@ function AuthForm() {
 
                 <div className={`${style.formBox} ${style.login}`}>
                     <form>
-                        <h1 className={style.titan}>{t("auth.loginForm.login")}</h1>
+                        <h1 className={style.bold}>{t("auth.loginForm.login")}</h1>
 
                         <div className={style.inputBox}>
                             <input type="text" placeholder={t("auth.placeholders.username")} required/>
@@ -33,23 +33,12 @@ function AuthForm() {
                         <button type="submit" className={style.btn}>
                             {t("auth.loginForm.login")}
                         </button>
-
-                        <p className={style.formText}>
-                            {t("auth.loginForm.socialMedia")}
-                        </p>
-
-                        <div className={style.socialIcons}>
-                            <a href="#"><i className="bx bxl-google"></i></a>
-                            <a href="#"><i className="bx bxl-facebook"></i></a>
-                            <a href="#"><i className="bx bxl-instagram-alt"></i></a>
-                            <a href="#"><i className="bx bxl-gmail"></i></a>
-                        </div>
                     </form>
                 </div>
 
                 <div className={`${style.formBox} ${style.register}`}>
                     <form>
-                        <h1 className={style.titan}>
+                        <h1 className={style.bold}>
                             {t("auth.registrationForm.registration")}
                         </h1>
 
@@ -71,23 +60,12 @@ function AuthForm() {
                         <button type="submit" className={style.btn}>
                             {t("auth.registrationForm.register")}
                         </button>
-
-                        <p className={style.formText}>
-                            {t("auth.registrationForm.socialMedia")}
-                        </p>
-
-                        <div className={style.socialIcons}>
-                            <a href="#"><i className="bx bxl-google"></i></a>
-                            <a href="#"><i className="bx bxl-facebook"></i></a>
-                            <a href="#"><i className="bx bxl-instagram-alt"></i></a>
-                            <a href="#"><i className="bx bxl-gmail"></i></a>
-                        </div>
                     </form>
                 </div>
 
                 <div className={style.toggleBox}>
                     <div className={`${style.togglePanel} ${style.toggleLeft} ${active ? style.activeToggleLeft : ''}`}>
-                        <h1 className={style.titan}>
+                        <h1 className={style.bold}>
                             {t("auth.loginForm.welcome")}
                         </h1>
                         <p>{t("auth.loginForm.question")}</p>
@@ -100,7 +78,7 @@ function AuthForm() {
                     </div>
 
                     <div className={`${style.togglePanel} ${style.toggleRight} ${active ? style.activeToggleRight : ''}`}>
-                        <h1 className={style.titan}>
+                        <h1 className={style.bold}>
                             {t("auth.registrationForm.welcomeBack")}
                         </h1>
                         <p>{t("auth.registrationForm.question")}</p>

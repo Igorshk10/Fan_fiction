@@ -5,9 +5,10 @@
     font-family: var(--main-font);
 }
 
-.titan{
+.bold{
     font-family: var(--auth-font);
     font-weight: 900;
+    margin-bottom: 10px;
 }
 
 .authWrapper{
@@ -69,7 +70,7 @@
 
 .container h1{
     font-size: 36px;
-    margin: -10px 0;
+    margin: 10px 0;
 }
 
 .inputBox{
@@ -178,36 +179,6 @@
 
 .btnToggle:active{
     transform: scale(0.98);
-}
-
-.container p{
-    margin-top: 15px;
-
-    font-size: 14.5px;
-}
-
-.socialIcons{
-    display: flex;
-    justify-content: center;
-
-}
-
-.socialIcons a{
-    display: inline-flex;
-    padding: 10px;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    font-size: 24px;
-    color: var(--gary-white);
-    text-decoration: none;
-    margin: 0  8px;
-    transition: all 0.3s ease;
-}
-
-.socialIcons a:hover{
-    border: 2px solid #a413f8;
-    background-color: #a413f8;
-    color: #fff;
 }
 
 .toggleBox{

@@ -23,13 +23,11 @@
       "question": "Не маєте акаунта?",
       "login": "Увійти",
       "forgot": "Забули пароль?",
-      "socialMedia": "або увійдіть через",
       "register": "Зареєструватися"
     },
     "registrationForm": {
       "welcomeBack": "З поверненням!",
       "question": "Вже маєте акаунт?",
-      "socialMedia": "або зареєструйтеся через",
       "register": "Зареєструватися",
       "registration": "Реєстрація"
     },
