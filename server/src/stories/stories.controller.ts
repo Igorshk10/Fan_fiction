@@ -1,10 +1,10 @@
 import { Controller, Get, Post, Body, Param, UseGuards, Request } from '@nestjs/common';
-import { StoriesService } from './stories.service';
-import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
-import { CreateStoryDto } from './dto/create-story.dto'; // Імпортуємо ваш DTO
+import { CreateStoryDto } from './dto/create-story.dto';
+import {JwtUsersGuard} from "../users/guards/jwt.users.guard";
+import {StoriesService} from "./stories.server";
 
 @Controller('stories')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtUsersGuard)
 export class StoriesController {
     constructor(private readonly storiesService: StoriesService) {}
 

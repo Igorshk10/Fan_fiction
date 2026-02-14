@@ -1,6 +1,5 @@
 import { IsString, MinLength } from 'class-validator';
 export class CreateStoryDto {
-     title: string;
      prompt: string;
      length: number;
     @IsString()

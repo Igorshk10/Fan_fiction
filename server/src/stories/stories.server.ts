@@ -6,7 +6,7 @@ export class StoriesService {
     private stories = []; // Тимчасово, поки немає БД
 
     async generate(createStoryDto: CreateStoryDto, userId: string) {
-        // 1. Тут буде виклик OpenAI або іншої моделі
+
         const generatedText = `Одного разу в жанрі ${createStoryDto.genre}... (Тут текст від AI)`;
 
         const newStory = {
@@ -24,5 +24,13 @@ export class StoriesService {
         return this.stories.filter(s => {
             return s.userId === userId;
         });
+    }
+
+    findOne(id: string, userId: any) {
+        return Promise.resolve(undefined);
+    }
+
+    generateStory(userId: any, createStoryDto: CreateStoryDto) {
+        return Promise.resolve(undefined);
     }
 }
