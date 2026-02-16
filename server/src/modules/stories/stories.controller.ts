@@ -1,9 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { StoriesService } from './stories.service';
 import { CreateStoryDto } from './dto/create-story.dto';
-import { UpdateStoryDto } from './dto/update-story.dto';
-import {Story} from "./entities/story.entity";
-
 @Controller('stories')
 export class StoriesController {
   constructor(private readonly storiesService: StoriesService) {}

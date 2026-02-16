@@ -1,6 +1,5 @@
-import {Body, Injectable} from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import {CreateStoryDto} from './dto/create-story.dto';
-import {UpdateStoryDto} from './dto/update-story.dto';
 import {InjectRepository} from "@nestjs/typeorm";
 import {Story} from "./entities/story.entity";
 import {Repository} from "typeorm";
@@ -13,7 +12,7 @@ export class StoriesService {
     ) {
     }
 
-    create(dto : CreateStoryDto, userId: number   ) {
+    create(dto: CreateStoryDto, userId: number) {
         const story = this.storyRepository.create({
             ...dto,
             userId,
