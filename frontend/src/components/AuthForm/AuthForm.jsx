@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import style from "./AuthForm.module.css";
 import {useTranslation} from "react-i18next";
+import MyInput from "../../UI/MyInput/MyInput";
 
 function AuthForm() {
     const [active, setActive] = useState(false);
@@ -14,15 +15,15 @@ function AuthForm() {
                     <form>
                         <h1 className={style.bold}>{t("auth.loginForm.login")}</h1>
 
-                        <div className={style.inputBox}>
-                            <input type="text" placeholder={t("auth.placeholders.username")} required/>
-                            <i className="bx bxs-user"></i>
-                        </div>
+                        <MyInput  type="text"
+                                  placeholder={t("auth.placeholders.username")}
+                                  required={true}
+                                  icon={<i className="bx bxs-user"></i>} />
 
-                        <div className={style.inputBox}>
-                            <input type="password" placeholder={t("auth.placeholders.password")}  required/>
-                            <i className="bx bxs-lock-alt"></i>
-                        </div>
+                        <MyInput  type="password"
+                                  placeholder={t("auth.placeholders.password")}
+                                  required={true}
+                                  icon={<i className="bx bxs-lock-alt"></i>} />
 
                         <div className={style.forgotLink}>
                             <a href="#" className={style.forgotPassword}>
@@ -42,20 +43,20 @@ function AuthForm() {
                             {t("auth.registrationForm.registration")}
                         </h1>
 
-                        <div className={style.inputBox}>
-                            <input type="text" placeholder={t("auth.placeholders.username")} required/>
-                            <i className="bx bxs-user"></i>
-                        </div>
+                        <MyInput  type="text"
+                                  placeholder={t("auth.placeholders.username")}
+                                  required={true}
+                                  icon={<i className="bx bxs-user"></i>} />
 
-                        <div className={style.inputBox}>
-                            <input type="email" placeholder={t("auth.placeholders.email")} required/>
-                            <i className="bx bxs-envelope-open bx-flip-horizontal"></i>
-                        </div>
+                        <MyInput  type="email"
+                                  placeholder={t("auth.placeholders.email")}
+                                  required={true}
+                                  icon={<i className="bx bxs-envelope-open bx-flip-horizontal"></i>} />
 
-                        <div className={style.inputBox}>
-                            <input type="password" placeholder={t("auth.placeholders.password")} required/>
-                            <i className="bx bxs-lock-alt"></i>
-                        </div>
+                        <MyInput  type="password"
+                                  placeholder={t("auth.placeholders.password")}
+                                  required={true}
+                                  icon={<i className="bx bxs-lock-alt"></i>} />
 
                         <button type="submit" className={style.btn}>
                             {t("auth.registrationForm.register")}

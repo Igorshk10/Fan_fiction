@@ -10,6 +10,7 @@ import FanficsPage from "./pages/FanficsPage";
 import Footer from "./components/Footer/Footer";
 import AuthPage from "./pages/AuthPage";
 import MainLayout from "./layouts/MainLayout";
+import CreateStoryPage from "./pages/CreateStoryPage";
 
 function App() {
   const [data, setData] = useState(null);
@@ -30,6 +31,7 @@ function App() {
                   <Route element={<MainLayout />}>
                       <Route path="/" element={<MainPage />} />
                       <Route path="/fanfics" element={<FanficsPage />} />
+                      <Route path="/story/create" element={<CreateStoryPage />} />
                   </Route>
 
 
