@@ -1,14 +1,9 @@
-import {IsNotEmpty, IsOptional, IsString} from "class-validator";
+import {IsNotEmpty, IsString} from "class-validator";
 
-export class CreateStoryDto {
+export class AiStoryDto {
     @IsString()
     @IsNotEmpty()
     title: string;
-
-    @IsString()
-    @IsNotEmpty()
-    @IsOptional()
-    content: string;
 
     @IsString()
     @IsNotEmpty()
@@ -20,5 +15,5 @@ export class CreateStoryDto {
 
     @IsString()
     @IsNotEmpty()
-    prompt: string;
+    characters: string;
 }

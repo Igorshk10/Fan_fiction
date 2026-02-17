@@ -1,22 +1,38 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { StoriesService } from './stories.service';
-import { CreateStoryDto } from './dto/create-story.dto';
+import {Controller, Get, Post, Body, Param, UseGuards, Request} from '@nestjs/common'; // Додано Request
+import {StoriesService} from './stories.service';
+import {CreateStoryDto} from './dto/create-story.dto';
+import {JwtAuthGuard} from '../../guards/jwt-auth.guard';
+import {AiStoryDto} from "./dto/ai-story.dto";
+
 @Controller('stories')
-export class StoriesController {
-  constructor(private readonly storiesService: StoriesService) {}
+    export class StoriesController {
+    constructor(private readonly storiesService: StoriesService) {
+    }
 
-  @Post('generate')
-  create(@Body() dto: CreateStoryDto, @Body('userId') userId: number /* до появи JWT */) {
-    return this.storiesService.create(dto, userId);
-  }
+    @Post('generate')
+    @UseGuards(JwtAuthGuard)
+    generate(@Body() dto: CreateStoryDto, @Request() req) {
+        return this.storiesService.generateAndSave(dto, req.user.userId);
+    }
+    @Post('ai')
+    //@UseGuards(JwtAuthGuard)
+    ai(@Body() dto: AiStoryDto, @Request() req) {
+        return this.storiesService.AiGenerate(dto);
+    }
 
-  @Get()
-  findAll() {
-    return this.storiesService.findAll();
-  }
+    @Get('my-stories')
+    @UseGuards(JwtAuthGuard)
+    findAllMyStories(@Request() req) {
+        return this.storiesService.findAllByUserId(req.user.userId);
+    }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.storiesService.findOne(+id);
-  }
+    @Get()
+    findAll() {
+        return this.storiesService.findAll();
+    }
+
+    @Get(':id')
+    findOne(@Param('id') id: string) {
+        return this.storiesService.findOne(+id);
+    }
 }

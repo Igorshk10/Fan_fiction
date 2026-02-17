@@ -23,6 +23,8 @@
     "concurrently": "^9.2.1"
   },
   "dependencies": {
+    "@google/genai": "^1.41.0",
+    "@google/generative-ai": "^0.24.1",
     "dotenv": "^17.3.1"
   }
 }
