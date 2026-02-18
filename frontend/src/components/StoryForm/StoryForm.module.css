@@ -17,6 +17,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+        font-family: var(--main-font);
 }
 
 
@@ -60,7 +61,12 @@
 
 .bottomForm{
     width: 100%;
+}
 
+.option{
+    font-size: 18px;
+    text-align: center;
+    font-family: var(--main-font);
 }
 
 .add{
@@ -73,6 +79,7 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
     margin-left: 20px;
+    font-family: var(--main-font);
 }
 
 .add:hover{
@@ -85,6 +92,62 @@
     transform: scale(0.98);
 }
 
+.characters{
+    border: 1px dashed var(--b-w);
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    transition: all 0.3s ease;
+}
+
+.character{
+    border: 2px solid #dddddd;
+    font-size: 16px;
+    background-color: var(--transparent-p);
+    border-radius: 3px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px 5px;
+    font-family: var(--main-font);
+}
+
+.template{
+    width: 100%;
+    padding: 20px 10px 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.person{
+    height: 220px;
+    width: 150px;
+    padding: 10px;
+    border: 2px solid #dddddd;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-wrap: wrap;
+}
+
+.person hr{
+    width: 80%;
+    border: none;
+    height: 2px;
+    background-color: black;
+    margin: 5px 0;
+}
+
+.character:active{
+    transform: scale(0.98);
+}
+
 .create{
     width: 100%;
     text-align: center;
@@ -94,6 +157,7 @@
     border: 2px solid var(--p-w);
     font-size: 16px;
     background-color: var(--p-transperent);
+    font-family: var(--main-font);
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     color: white;
     transition: all 0.3s ease;

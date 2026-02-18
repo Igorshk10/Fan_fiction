@@ -4,6 +4,26 @@ import MyRadio from "../../UI/MyRadio/MyRadio";
 
 function StoryForm() {
     const [genre , setGenre] = useState('');
+    const [character , setCharacter] = useState('');
+    const [characters, setCharacters] = useState([]);
+
+
+    const addCharacter = () => {
+        const trimmed = character.trim();
+
+        if (!trimmed) return;
+
+        setCharacters(prev => [
+            ...prev,
+            { id: crypto.randomUUID(), name: trimmed, description: '' }
+        ]);
+        setCharacter('');
+    };
+
+    const removeCharacter = (id) => {
+        setCharacters(prev => prev.filter(c => c.id !== id));
+    };
+
     const genres = [
         "Romance",
         "Drama",
@@ -20,7 +40,10 @@ function StoryForm() {
     ];
     return (
         <div className={style.storyForm}>
-            <form className={style.form} action="">
+            <form   onSubmit={(e) => {
+                e.preventDefault();
+                addCharacter();
+            }} className={style.form} action="">
                 <div className={style.topForm}>
                     <div className={style.formElement}>
                         <label className={style.formTitle} htmlFor='title'>Title</label>
@@ -36,7 +59,8 @@ function StoryForm() {
                 <div className={style.middleForm}>
                     <p className={style.formTitle}>Genre</p>
                     <div className={style.genresBox}>{genres.map(e => (
-                        <MyRadio key={e} name='genre' id={e} value={e}/>))}</div>
+                        <MyRadio key={e} name='genre' id={e} value={e} checked={genre === e}
+                                 onChange={() => setGenre(e)}/>))}</div>
                 </div>
 
 
@@ -44,8 +68,22 @@ function StoryForm() {
                 <div className={style.bottomForm}>
                     <label className={style.formTitle} htmlFor="character">Characters</label>
                     <br/>
-                    <input className={style.formInput} id='character' type="text" placeholder="character name"/>
-                    <button className={style.add}>Add+</button>
+                    <input className={style.formInput} id='character' type="text" placeholder="character name" value={character} onChange={(e) => setCharacter(e.target.value)}/>
+                    <button className={style.add} onClick={addCharacter}>Add+</button>
+                    <p className={style.option}>or you can choose one of this:</p>
+                    <div className={style.template}>
+                        <div className={style.person}>
+                            <p>Dorian</p>
+                            <hr/>
+                            <p>A tall, handsome man with long hair. But there are rumors that his soul belongs to a demon.</p>
+                        </div>
+                    </div>
+                    <div className={style.characters}>
+                        {characters.map(e => (
+                            <button onClick={() => {removeCharacter(e.id)}} key={e.id} className={style.character}>
+                                {e.name} <i className='bx bx-x'></i>
+                            </button>))}
+                    </div>
                 </div>
 
                 <button className={style.create}>Create</button>
