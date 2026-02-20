@@ -44,11 +44,27 @@ export class UsersService {
             token
         };
     }
+    async refresh(refreshToken: string) {
+        const payload = await this.jwtService.verifyAsync(refreshToken, {
+            secret: process.env.JWT_REFRESH_SECRET,
+        });
 
+        const newAccessToken = await this.jwtService.signAsync(
+            { sub: payload.sub },
+            {
+                secret: process.env.JWT_ACCESS_SECRET,
+                expiresIn: '15m',
+            },
+        );
+
+        return {
+            accessToken: newAccessToken,
+        };
+    }
     async login(dto: LoginUserDto) {
         const user = await this.userRepository.findOne({
             where: { username: dto.username },
-            select: ['id', 'username', 'email', 'password'],
+            select: ['id', 'username', 'password'],
         });
 
         if (!user) {

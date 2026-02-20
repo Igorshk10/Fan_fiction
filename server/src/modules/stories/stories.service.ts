@@ -6,7 +6,6 @@ import { Repository } from "typeorm";
 import {GoogleGenAI} from '@google/genai';
 import { ConfigService } from "@nestjs/config";
 import {AiStoryDto} from "./dto/ai-story.dto";
-import {GoogleGenerativeAI} from "@google/generative-ai";
 
 @Injectable()
 export class StoriesService {

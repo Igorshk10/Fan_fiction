@@ -1,8 +1,6 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, UseGuards} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post} from '@nestjs/common';
 import {UsersService} from './users.service';
-import {CreateUserDto} from './dto/create-user.dto';
-import {LoginUserDto} from "./dto/login-user.dto";
-
+import {RefreshUserDto} from "./dto/refresh-user.dto";
 @Controller('users')
 export class UsersController {
     constructor(private readonly usersService: UsersService) {
@@ -11,7 +9,10 @@ export class UsersController {
     findAll() {
         return this.usersService.findAll();
     }
-
+    @Post('refresh')
+    async refresh(@Body() dto: RefreshUserDto) {
+        return this.usersService.refresh(dto.refreshToken);
+    }
     @Get(':id')
     findOne(@Param('id') id: string) {
         return this.usersService.findOne(+id);
@@ -19,17 +20,3 @@ export class UsersController {
 
 }
 
-@Controller('auth')
-export class AuthController {
-    constructor(private readonly usersService: UsersService) {}
-
-    @Post('register')
-    create(@Body() dto: CreateUserDto) {
-        return this.usersService.create(dto);
-    }
-
-    @Post('login')
-    login(@Body() dto: LoginUserDto) {
-        return this.usersService.login(dto);
-    }
-}

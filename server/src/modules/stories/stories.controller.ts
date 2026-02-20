@@ -15,7 +15,6 @@ import {AiStoryDto} from "./dto/ai-story.dto";
         return this.storiesService.generateAndSave(dto, req.user.userId);
     }
     @Post('ai')
-    //@UseGuards(JwtAuthGuard)
     ai(@Body() dto: AiStoryDto, @Request() req) {
         return this.storiesService.AiGenerate(dto);
     }
