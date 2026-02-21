@@ -1,7 +1,7 @@
 import {Controller, Get, Post, Body, Param, UseGuards, Request} from '@nestjs/common'; // Додано Request
 import {StoriesService} from './stories.service';
 import {CreateStoryDto} from './dto/create-story.dto';
-import {JwtAuthGuard} from '../../guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../users/guards/jwt-auth.guard';
 import {AiStoryDto} from "./dto/ai-story.dto";
 
 @Controller('stories')
