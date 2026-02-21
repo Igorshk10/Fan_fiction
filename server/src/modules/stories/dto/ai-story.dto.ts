@@ -16,4 +16,8 @@ export class AiStoryDto {
     @IsString()
     @IsNotEmpty()
     characters: string;
+
+    @IsString()
+    @IsNotEmpty()
+    prompt: string;
 }

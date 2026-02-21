@@ -16,6 +16,9 @@ export class CreateStoryDto {
 
     @IsString()
     @IsNotEmpty()
+    characters: string;
+    @IsString()
+    @IsNotEmpty()
     genre: string;
 
     @IsString()

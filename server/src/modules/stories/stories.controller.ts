@@ -1,20 +1,22 @@
 import {Controller, Get, Post, Body, Param, UseGuards, Request} from '@nestjs/common'; // Додано Request
 import {StoriesService} from './stories.service';
 import {CreateStoryDto} from './dto/create-story.dto';
-import { JwtAuthGuard } from '../users/guards/jwt-auth.guard';
+import {JwtAuthGuard} from '../users/guards/jwt-auth.guard';
 import {AiStoryDto} from "./dto/ai-story.dto";
 
 @Controller('stories')
-    export class StoriesController {
+export class StoriesController {
     constructor(private readonly storiesService: StoriesService) {
     }
 
     @Post('generate')
-    @UseGuards(JwtAuthGuard)
+    //@UseGuards(JwtAuthGuard)
     generate(@Body() dto: CreateStoryDto, @Request() req) {
         return this.storiesService.generateAndSave(dto, req.user.userId);
     }
+
     @Post('ai')
+    //@UseGuards(JwtAuthGuard)
     ai(@Body() dto: AiStoryDto, @Request() req) {
         return this.storiesService.AiGenerate(dto);
     }
