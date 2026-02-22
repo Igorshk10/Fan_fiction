@@ -10,13 +10,13 @@ export class StoriesController {
     }
 
     @Post('generate')
-    //@UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     generate(@Body() dto: CreateStoryDto, @Request() req) {
         return this.storiesService.generateAndSave(dto, req.user.userId);
     }
 
     @Post('ai')
-    //@UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     ai(@Body() dto: AiStoryDto, @Request() req) {
         return this.storiesService.AiGenerate(dto);
     }

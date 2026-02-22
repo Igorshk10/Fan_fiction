@@ -1,4 +1,5 @@
 import {IsNotEmpty, IsOptional, IsString} from "class-validator";
+import {CreateDateColumn} from "typeorm";
 
 export class CreateStoryDto {
     @IsString()
@@ -7,16 +8,12 @@ export class CreateStoryDto {
 
     @IsString()
     @IsNotEmpty()
-    @IsOptional()
-    content: string;
-
-    @IsString()
-    @IsNotEmpty()
     fandom: string;
 
     @IsString()
     @IsNotEmpty()
     characters: string;
+
     @IsString()
     @IsNotEmpty()
     genre: string;
