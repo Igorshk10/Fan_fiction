@@ -1,30 +1,34 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import style from './StoryForm.module.css'
 import MyRadio from "../../UI/MyRadio/MyRadio";
+import {LanguageContext} from "../../context/LanguageContext";
+import {useTranslation} from "react-i18next";
 
 function StoryForm() {
     const [genre, setGenre] = useState('');
     const [character, setCharacter] = useState('');
     const [characters, setCharacters] = useState([]);
+    const { t } = useTranslation();
+    const { lang, toggleLanguage } = useContext(LanguageContext);
 
-    const addCharacter = (name, description = '', templateId = null) => {
-        const characterName = typeof name === 'string'
-            ? name.trim()
-            : character.trim();
+    const addCharacter = (name = '', description = '', templateId = null) => {
+        if (!templateId) {
+            const characterName = character.trim();
+            if (!characterName) return;
 
-        if (!characterName) return;
+            setCharacters(prev => [
+                ...prev,
+                { id: crypto.randomUUID(), name: characterName, description, templateId: null }
+            ]);
+
+            setCharacter('');
+            return;
+        }
 
         setCharacters(prev => [
             ...prev,
-            {
-                id: crypto.randomUUID(),
-                name: characterName,
-                description,
-                templateId
-            }
+            { id: crypto.randomUUID(), templateId }
         ]);
-
-        setCharacter('');
     };
 
     const removeCharacter = (id) => {
@@ -33,19 +37,36 @@ function StoryForm() {
 
     const templates = [
         {
-            id: 'dorian',
-            name: 'Dorian',
-            description: 'desc'
+            id: 'heroine',
+            name: { en: 'Emma', ua: 'Емма' },
+            description: {
+                en: 'Strong-willed and compassionate. She stands up for what she believes in and never abandons the people she cares about.',
+                ua: 'Сильна духом і співчутлива. Вона відстоює те, у що вірить, і ніколи не покидає дорогих їй людей.'
+            }
         },
         {
-            id: 'luna',
-            name: 'Luna',
-            description: 'desc'
+            id: 'villain',
+            name: { en: 'Dorian', ua: 'Доріан' },
+            description: {
+                en: 'Cold, intelligent and manipulative antagonist. Charismatic but ruthless, always planning three steps ahead.',
+                ua: 'Холодний, розумний і хитрий. Харизматичний, але безжальний, завжди планує на кілька кроків уперед.'
+            }
         },
         {
-            id: 'ezra',
-            name: 'Ezra',
-            description: 'desc'
+            id: 'comic',
+            name: { en: 'Luna', ua: 'Луна' },
+            description: {
+                en: 'Cheerful and witty optimist who brings humor to any situation. Loyal friend with a surprisingly sharp mind.',
+                ua: 'Весела та дотепна оптимістка, яка додає гумору в будь-яку ситуацію. Вірна подруга з несподівано гострим розумом.'
+            }
+        },
+        {
+            id: 'mysterious',
+            name: { en: 'Ethan', ua: 'Ітан' },
+            description: {
+                en: 'Quiet and enigmatic loner with a hidden past. Observant, calm, and far more powerful than they appear.',
+                ua: 'Тихий та загадковий одинак із прихованим минулим. Спостережливий, спокійний і значно могутніший, ніж здається.'
+            }
         }
     ];
 
@@ -93,9 +114,11 @@ function StoryForm() {
                 <div className={style.bottomForm}>
                     <label className={style.formTitle} htmlFor="character">Characters</label>
                     <br/>
-                    <input className={style.formInput} id='character' type="text" placeholder="character name"
-                           value={character} onChange={(e) => setCharacter(e.target.value)}/>
-                    <button className={style.add} onClick={addCharacter}>Add+</button>
+                    <div className={style.inputRow}>
+                        <input className={style.formInput} id='character' type="text" placeholder="character name"
+                               value={character} onChange={(e) => setCharacter(e.target.value)}/>
+                        <button className={style.add} onClick={addCharacter}>Add+</button>
+                    </div>
                     <p className={style.option}>or you can choose one of this:</p>
                     <div className={style.template}>
                         <div className={style.template}>
@@ -108,15 +131,15 @@ function StoryForm() {
                                         className={isSelected ? style.selected : style.person}
                                         onClick={() => {
                                             if (!isSelected) {
-                                                addCharacter(t.name, t.description, t.id);
+                                                addCharacter('', '', t.id)
                                             }
                                         }}
                                     >
                                         <div className={style.checkbox}>{isSelected && <i className='bx bx-check'></i>}</div>
                                         <div className={style.personContent}>
-                                            <p className={style.personName}>{t.name}</p>
+                                            <p className={style.personName}>{t.name[lang]}</p>
                                             <hr />
-                                            <p className={style.personDesc}>{t.description}</p>
+                                            <p className={style.personDesc}>{t.description[lang]}</p>
                                         </div>
                                     </button>
                                 );
@@ -124,12 +147,17 @@ function StoryForm() {
                         </div>
                     </div>
                     <div className={style.characters}>
-                        {characters.map(e => (
-                            <button onClick={() => {
-                                removeCharacter(e.id)
-                            }} key={e.id} className={style.character}>
-                                {e.name} <i className='bx bx-x'></i>
-                            </button>))}
+                        {characters.map(c => {
+                            const template = c.templateId ? templates.find(t => t.id === c.templateId) : null;
+                            const name = template ? template.name[lang] : c.name;
+                            const description = template ? template.description[lang] : c.description;
+
+                            return (
+                                <button key={c.id} onClick={() => removeCharacter(c.id)} className={style.character}>
+                                    {name} <i className='bx bx-x'></i>
+                                </button>
+                            );
+                        })}
                     </div>
                 </div>
 
