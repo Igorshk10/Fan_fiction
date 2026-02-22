@@ -7,14 +7,21 @@ function StoryForm() {
     const [character, setCharacter] = useState('');
     const [characters, setCharacters] = useState([]);
 
-    const addCharacter = (name, description = '') => {
-        const characterName = typeof name === 'string' ? name.trim() : character.trim();
+    const addCharacter = (name, description = '', templateId = null) => {
+        const characterName = typeof name === 'string'
+            ? name.trim()
+            : character.trim();
 
         if (!characterName) return;
 
         setCharacters(prev => [
             ...prev,
-            { id: crypto.randomUUID(), name: characterName, description }
+            {
+                id: crypto.randomUUID(),
+                name: characterName,
+                description,
+                templateId
+            }
         ]);
 
         setCharacter('');
@@ -26,11 +33,20 @@ function StoryForm() {
 
     const templates = [
         {
+            id: 'dorian',
             name: 'Dorian',
-            description: 'A tall, handsome man with long hair. But there are rumors that his soul belongs to a demon.'
+            description: 'desc'
         },
-        {name: 'Luna', description: 'A mysterious young woman who always appears at night.'},
-        {name: 'Ezra', description: 'A clever inventor with a mischievous smile.'}
+        {
+            id: 'luna',
+            name: 'Luna',
+            description: 'desc'
+        },
+        {
+            id: 'ezra',
+            name: 'Ezra',
+            description: 'desc'
+        }
     ];
 
     const genres = [
@@ -84,15 +100,19 @@ function StoryForm() {
                     <div className={style.template}>
                         <div className={style.template}>
                             {templates.map(t => {
-                                const isSelected = characters.some(c => c.name === t.name);
+                                const isSelected = characters.some(c => c.templateId === t.id);
                                 return (
                                     <button
-                                        key={t.name}
+                                        key={t.id}
                                         type="button"
-                                        className={`${style.person} ${isSelected ? style.selected : ''}`}
-                                        onClick={() => addCharacter(t.name, t.description)}
+                                        className={isSelected ? style.selected : style.person}
+                                        onClick={() => {
+                                            if (!isSelected) {
+                                                addCharacter(t.name, t.description, t.id);
+                                            }
+                                        }}
                                     >
-                                        <div className={style.checkbox}>{isSelected && <i class='bx bx-check'></i>}</div>
+                                        <div className={style.checkbox}>{isSelected && <i className='bx bx-check'></i>}</div>
                                         <div className={style.personContent}>
                                             <p className={style.personName}>{t.name}</p>
                                             <hr />

@@ -156,6 +156,7 @@
 }
 
 .selected {
+    composes: person;
     border-color: var(--main-color);
 }
 
