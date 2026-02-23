@@ -6,6 +6,8 @@ import {useTranslation} from "react-i18next";
 
 function StoryForm() {
     const [genre, setGenre] = useState('');
+    const [title, setTitle] = useState('');
+    const [fandom, setFandom] = useState('');
     const [character, setCharacter] = useState('');
     const [characters, setCharacters] = useState([]);
     const { t } = useTranslation();
@@ -70,21 +72,48 @@ function StoryForm() {
         }
     ];
 
-    const genres = [
-        "Romance",
-        "Drama",
-        "Comedy",
-        "Action",
-        "Adventure",
-        "Fantasy",
-        "Horror",
-        "Mystery",
-        "Thriller",
-        "Sci-Fi",
-        "Detective",
-        "Psychological"
-    ];
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
+        if (!title.trim() || !fandom.trim() || !genre || characters.length === 0) {
+            console.warn("Please fill all fields and add at least one character.");
+            return;
+        }
+
+        const formattedCharacters = characters.map(c => {
+            if (c.templateId) {
+                const template = templates.find(t => t.id === c.templateId);
+                return `${template.name[lang]}: ${template.description[lang]}`; // рядок
+            } else {
+                return c.name.trim();
+            }
+        }).join('; ');
+
+        const result = {
+            lang,
+            title,
+            fandom,
+            genre,
+            characters: formattedCharacters
+        };
+
+        console.log(result);
+    };
+
+    const genres = [
+        { en: "Romance", ua: "Романтика" },
+        { en: "Drama", ua: "Драма" },
+        { en: "Comedy", ua: "Комедія" },
+        { en: "Action", ua: "Екшн" },
+        { en: "Adventure", ua: "Пригоди" },
+        { en: "Fantasy", ua: "Фентезі" },
+        { en: "Horror", ua: "Жахи" },
+        { en: "Mystery", ua: "Містика" },
+        { en: "Thriller", ua: "Трилер" },
+        { en: "Sci-Fi", ua: "Наукова фантастика" },
+        { en: "Detective", ua: "Детектив" },
+        { en: "Psychological Thriller", ua: "Психологічний трилер" }
+    ];
     return (
         <div className={style.storyForm}>
             <form onSubmit={(e) => {
@@ -93,33 +122,40 @@ function StoryForm() {
             }} className={style.form} action="">
                 <div className={style.topForm}>
                     <div className={style.formElement}>
-                        <label className={style.formTitle} htmlFor='title'>Title</label>
-                        <input className={style.formInput} placeholder='title' id='title' type="text"/>
+                        <label className={style.formTitle} htmlFor='title'>{t("storyForm.title")}</label>
+                        <input className={style.formInput} value={title} onChange={(e) => {setTitle(e.target.value)}} placeholder={t("storyForm.titlePlaceholder")} id='title' type="text" required/>
                     </div>
                     <div className={style.formElement}>
-                        <label className={style.formTitle} htmlFor="fandom">Fandom</label>
-                        <input className={style.formInput} placeholder='fandom' type="text" id='fandom'/>
+                        <label className={style.formTitle} htmlFor="fandom">{t("storyForm.fandom")}</label>
+                        <input className={style.formInput} value={fandom} onChange={(e) => {setFandom(e.target.value)}} placeholder={t("storyForm.fandomPlaceholder")} type="text" id='fandom' required/>
                     </div>
 
                 </div>
 
                 <div className={style.middleForm}>
-                    <p className={style.formTitle}>Genre</p>
+                    <p className={style.formTitle}>{t("storyForm.genre")}</p>
                     <div className={style.genresBox}>{genres.map(e => (
-                        <MyRadio key={e} name='genre' id={e} value={e} checked={genre === e}
-                                 onChange={() => setGenre(e)}/>))}</div>
+                        <MyRadio
+                            key={e.en}
+                            name="genre"
+                            id={e.en}
+                            value={e.en}
+                            label={e[lang]}
+                            checked={genre === e.en}
+                            onChange={() => setGenre(e.en)}
+                        />
+                    ))}</div>
                 </div>
 
 
                 <div className={style.bottomForm}>
-                    <label className={style.formTitle} htmlFor="character">Characters</label>
-                    <br/>
+                    <label className={style.formTitle} htmlFor="character">{t("storyForm.character")}</label>
                     <div className={style.inputRow}>
-                        <input className={style.formInput} id='character' type="text" placeholder="character name"
+                        <input className={style.formInput} id='character' type="text" placeholder={t("storyForm.characterPlaceholder")}
                                value={character} onChange={(e) => setCharacter(e.target.value)}/>
-                        <button className={style.add} onClick={addCharacter}>Add+</button>
+                        <button className={style.add} onClick={addCharacter}>{t("storyForm.add")}</button>
                     </div>
-                    <p className={style.option}>or you can choose one of this:</p>
+                    <p className={style.option}>{t("storyForm.orChoose")}</p>
                     <div className={style.template}>
                         <div className={style.template}>
                             {templates.map(t => {
@@ -161,7 +197,7 @@ function StoryForm() {
                     </div>
                 </div>
 
-                <button className={style.create}>Create</button>
+                <button className={style.create} onClick={handleSubmit}>{t("storyForm.create")}</button>
             </form>
         </div>
     )

@@ -35,7 +35,7 @@ function Footer() {
                     </div>
 
                     <div className={style.section}>
-                        <h3>Contact</h3>
+                        <h3>{t("footer.contact")}</h3>
                         <div className={style.socials}>
                             <a href="#"><i className='bx bxl-instagram'></i></a>
                             <a href="#"><i className='bx bxl-twitter'></i></a>

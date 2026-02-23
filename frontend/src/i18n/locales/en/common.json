@@ -15,7 +15,9 @@
     "journeyTitle": "Our Journey",
     "story": "Our Story",
     "roadmap": "Roadmap",
-    "community": "Community"
+    "community": "Community",
+
+    "contact": "Contact"
   },
   "auth" : {
     "loginForm" : {
@@ -36,5 +38,17 @@
       "password": "Password",
       "email": "Email"
     }
+  },
+  "storyForm" : {
+    "title": "Title",
+    "titlePlaceholder": "title",
+    "fandom": "Fandom",
+    "fandomPlaceholder": "fandom",
+    "genre": "Genre",
+    "character": "Characters",
+    "characterPlaceholder": "character name",
+    "add": "Add",
+    "orChoose": "or you can choose one of this:",
+    "create": "Create"
   }
 }

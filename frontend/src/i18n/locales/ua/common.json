@@ -15,7 +15,9 @@
     "journeyTitle": "Наш шлях",
     "story": "Наша історія",
     "roadmap": "План розвитку",
-    "community": "Спільнота"
+    "community": "Спільнота",
+
+    "contact": "Контакти"
   },
   "auth": {
     "loginForm": {
@@ -36,5 +38,17 @@
       "password": "Пароль",
       "email": "Електронна пошта"
     }
+  },
+  "storyForm" : {
+    "title": "Назва",
+    "titlePlaceholder": "Введіть назву",
+    "fandom": "Фандом",
+    "fandomPlaceholder": "Введіть фандом",
+    "genre": "Жанр",
+    "character": "Персонажі",
+    "characterPlaceholder": "Ім'я персонажа",
+    "add": "Додати",
+    "orChoose": "або ви можете обрати один з шаблонів:",
+    "create": "Створити"
   }
 }
