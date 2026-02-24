@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body, Param, UseGuards, Request} from '@nestjs/common'; // Додано Request
+import {Controller, Get, Post, Body, Param, UseGuards, Request, Req} from '@nestjs/common'; // Додано Request
 import {StoriesService} from './stories.service';
 import {CreateStoryDto} from './dto/create-story.dto';
 import {JwtAuthGuard} from '../users/guards/jwt-auth.guard';
@@ -11,14 +11,34 @@ export class StoriesController {
 
     @Post('generate')
     @UseGuards(JwtAuthGuard)
-    generate(@Body() dto: CreateStoryDto, @Request() req) {
-        return this.storiesService.generateAndSave(dto, req.user.userId);
+    async generate(@Body() dto: AiStoryDto) {
+        return await this.storiesService.AiGenerate(dto);
     }
 
-    @Post('ai')
+    @Post('save')
     @UseGuards(JwtAuthGuard)
-    ai(@Body() dto: AiStoryDto, @Request() req) {
-        return this.storiesService.AiGenerate(dto);
+    async save(@Body() dto: CreateStoryDto, @Req() req) {
+        return await this.storiesService.save(dto, req.user.userId);
+    }
+
+    @Post('generate-and-save')
+    @UseGuards(JwtAuthGuard)
+    async generateAndSave(@Body() dto: AiStoryDto, @Req() req,) {
+        const generatedContent = await this.storiesService.AiGenerate(dto);
+
+        if (!generatedContent.text) {
+            throw new Error('AI did not return any text');
+        }
+
+        const createDto: CreateStoryDto = {
+            title: dto.title,
+            fandom: dto.fandom,
+            genre: dto.genre,
+            prompt: dto.getPrompt(),
+            content: generatedContent.text
+        };
+
+        return await this.storiesService.save(createDto, req.user.userId);
     }
 
     @Get('my-stories')

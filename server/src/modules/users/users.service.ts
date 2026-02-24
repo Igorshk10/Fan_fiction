@@ -44,6 +44,7 @@ export class UsersService {
             token
         };
     }
+
     async refresh(refreshToken: string) {
         const payload = await this.jwtService.verifyAsync(refreshToken, {
             secret: process.env.JWT_REFRESH_SECRET,
