@@ -36,7 +36,7 @@
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    box-shadow: 0 0 10px 3px #e4e4e4;
+    box-shadow: 0 0 10px 3px var(--shadow);
     background-color: var(--white-dark);
     z-index: 10;
 }
