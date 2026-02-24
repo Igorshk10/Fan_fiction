@@ -24,14 +24,18 @@
       "welcome": "Ласкаво просимо!",
       "question": "Не маєте акаунта?",
       "login": "Увійти",
+      "socialMedia": "або",
       "forgot": "Забули пароль?",
-      "register": "Зареєструватися"
+      "register": "Зареєструватися",
+      "google" : "Увійти через Google "
     },
     "registrationForm": {
       "welcomeBack": "З поверненням!",
       "question": "Вже маєте акаунт?",
       "register": "Зареєструватися",
-      "registration": "Реєстрація"
+      "socialMedia": "або",
+      "registration": "Реєстрація",
+      "google" : "Увійти через Google "
     },
     "placeholders": {
       "username": "Імʼя користувача",
