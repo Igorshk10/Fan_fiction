@@ -8,7 +8,7 @@ function AuthForm() {
     const [active, setActive] = useState(false);
     const { t } = useTranslation();
 
-    const [loginUsername, setLoginUsername] = useState("");
+    const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
 
 
@@ -17,41 +17,87 @@ function AuthForm() {
     const [registerPassword, setRegisterPassword] = useState("");
 
 
+    const loginRequest = async () => {
+        const response = await fetch(
+            `${process.env.REACT_APP_API_URL}/auth/login`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: loginEmail,
+                    password: loginPassword,
+                }),
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || "Login failed");
+        }
+
+        localStorage.setItem("token", data.token);
+
+        return data;
+    };
+
     const handleLoginSubmit = (e) => {
         e.preventDefault();
 
-        if (!loginUsername || !loginPassword) {
-            console.log("All fields are required");
+        if (!loginEmail || !loginPassword) {
             toast.error("All fields are required");
             return;
         }
 
-        const userData = {
-            username: loginUsername,
-            password: loginPassword
-        };
+        toast.promise(loginRequest(), {
+            loading: "Logging in...",
+            success: (data) => `Welcome ${data.user.username}!`,
+            error: (err) => err.message,
+        });
+    };
 
-        toast.success("Login successful!");
-        console.log("Login:", userData);
+    const registerRequest = async () => {
+        const response = await fetch(
+            `${process.env.REACT_APP_API_URL}/auth/register`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    username: registerUsername,
+                    email: registerEmail,
+                    password: registerPassword,
+                }),
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || "Registration failed");
+        }
+
+        localStorage.setItem("token", data.token);
+
+        return data;
     };
 
     const handleRegisterSubmit = (e) => {
         e.preventDefault();
 
         if (!registerUsername || !registerEmail || !registerPassword) {
-            console.log("All fields are required");
             toast.error("All fields are required");
             return;
         }
 
-        const userData = {
-            username: registerUsername,
-            email: registerEmail,
-            password: registerPassword
-        };
-
-        toast.success("Registration successful!");
-        console.log("Register:", userData);
+        toast.promise(registerRequest(), {
+            loading: "Creating account...",
+            success: (data) => `Account created for ${data.user.username}!`,
+            error: (err) => err.message,
+        });
     };
 
     return (
@@ -59,16 +105,16 @@ function AuthForm() {
             <div className={`${style.container} ${active ? style.active : ""}`}>
 
                 <div className={`${style.formBox} ${style.login}`}>
-                    <form>
+                    <form onSubmit={handleLoginSubmit}>
                         <h1 className={style.bold}>{t("auth.loginForm.login")}</h1>
 
                         <MyInput
-                            type="text"
-                            placeholder={t("auth.placeholders.username")}
+                            type="email"
+                            placeholder={t("auth.placeholders.email")}
                             required
-                            icon={<i className="bx bxs-user"></i>}
-                            value={loginUsername}
-                            onChange={(e) => setLoginUsername(e.target.value)}
+                            icon={<i className="bx bxs-envelope-open bx-flip-horizontal"></i>}
+                            value={loginEmail}
+                            onChange={(e) => setLoginEmail(e.target.value)}
                         />
 
                         <MyInput
@@ -86,7 +132,7 @@ function AuthForm() {
                             </a>
                         </div>
 
-                        <button type="submit" className={style.btn} onClick={handleLoginSubmit}>
+                        <button type="submit" className={style.btn}>
                             {t("auth.loginForm.login")}
                         </button>
 
@@ -101,7 +147,7 @@ function AuthForm() {
                 </div>
 
                 <div className={`${style.formBox} ${style.register}`}>
-                    <form>
+                    <form onSubmit={handleRegisterSubmit}>
                         <h1 className={style.bold}>
                             {t("auth.registrationForm.registration")}
                         </h1>
@@ -133,7 +179,7 @@ function AuthForm() {
                             onChange={(e) => setRegisterPassword(e.target.value)}
                         />
 
-                        <button type="submit" className={style.btn} onClick={handleRegisterSubmit}>
+                        <button type="submit" className={style.btn}>
                             {t("auth.registrationForm.register")}
                         </button>
 

@@ -3,6 +3,7 @@ import style from './StoryForm.module.css'
 import MyRadio from "../../UI/MyRadio/MyRadio";
 import {LanguageContext} from "../../context/LanguageContext";
 import {useTranslation} from "react-i18next";
+import toast from "react-hot-toast";
 
 function StoryForm() {
     const [genre, setGenre] = useState('');
@@ -72,34 +73,6 @@ function StoryForm() {
         }
     ];
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        if (!title.trim() || !fandom.trim() || !genre || characters.length === 0) {
-            console.warn("Please fill all fields and add at least one character.");
-            return;
-        }
-
-        const formattedCharacters = characters.map(c => {
-            if (c.templateId) {
-                const template = templates.find(t => t.id === c.templateId);
-                return `${template.name[lang]}: ${template.description[lang]}`; // рядок
-            } else {
-                return c.name.trim();
-            }
-        }).join('; ');
-
-        const result = {
-            lang,
-            title,
-            fandom,
-            genre,
-            characters: formattedCharacters
-        };
-
-        console.log(result);
-    };
-
     const genres = [
         { en: "Romance", ua: "Романтика" },
         { en: "Drama", ua: "Драма" },
@@ -114,12 +87,64 @@ function StoryForm() {
         { en: "Detective", ua: "Детектив" },
         { en: "Psychological Thriller", ua: "Психологічний трилер" }
     ];
+
+    const storyRequest = async () => {
+        const formattedCharacters = characters.map(c => {
+            if (c.templateId) {
+                const template = templates.find(t => t.id === c.templateId);
+                return `${template.name[lang]}: ${template.description[lang]}`;
+            } else {
+                return c.name.trim();
+            }
+        }).join('; ');
+
+        const storyData = { language: lang, title, fandom, genre, characters: formattedCharacters };
+
+        const token = localStorage.getItem("token");
+        if (!token) {
+            throw new Error("You must be logged in to create a story.");
+        }
+
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/stories/generate-and-save`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify(storyData),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || "Failed to generate story");
+        }
+
+        console.log(data);
+        return data;
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (!title.trim() || !fandom.trim() || !genre || characters.length === 0) {
+            toast.error("Please fill all fields and add at least one character.");
+            return;
+        }
+
+        toast.promise(
+            storyRequest(),
+            {
+                loading: "Generating story...",
+                success: () => "Story generated successfully!",
+                error: (err) => err.message,
+            }
+        );
+    };
+
     return (
         <div className={style.storyForm}>
-            <form onSubmit={(e) => {
-                e.preventDefault();
-                addCharacter();
-            }} className={style.form} action="">
+            <form  onSubmit={handleSubmit} className={style.form} action="">
                 <div className={style.topForm}>
                     <div className={style.formElement}>
                         <label className={style.formTitle} htmlFor='title'>{t("storyForm.title")}</label>
@@ -153,7 +178,7 @@ function StoryForm() {
                     <div className={style.inputRow}>
                         <input className={style.formInput} id='character' type="text" placeholder={t("storyForm.characterPlaceholder")}
                                value={character} onChange={(e) => setCharacter(e.target.value)}/>
-                        <button className={style.add} onClick={addCharacter}>{t("storyForm.add")}</button>
+                        <button type="button" className={style.add} onClick={addCharacter}>{t("storyForm.add")}</button>
                     </div>
                     <p className={style.option}>{t("storyForm.orChoose")}</p>
                     <div className={style.template}>
@@ -189,7 +214,7 @@ function StoryForm() {
                             const description = template ? template.description[lang] : c.description;
 
                             return (
-                                <button key={c.id} onClick={() => removeCharacter(c.id)} className={style.character}>
+                                <button type="button" key={c.id} onClick={() => removeCharacter(c.id)} className={style.character}>
                                     {name} <i className='bx bx-x'></i>
                                 </button>
                             );
@@ -197,7 +222,7 @@ function StoryForm() {
                     </div>
                 </div>
 
-                <button className={style.create} onClick={handleSubmit}>{t("storyForm.create")}</button>
+                <button type='submit' className={style.create} onClick={handleSubmit}>{t("storyForm.create")}</button>
             </form>
         </div>
     )

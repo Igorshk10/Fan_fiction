@@ -65,7 +65,7 @@ export class UsersService {
 
     async login(dto: LoginUserDto) {
         const user = await this.userRepository.findOne({
-            where: { username: dto.username },
+            where: { email: dto.email },
             select: ['id', 'username', 'password'],
         });
 
