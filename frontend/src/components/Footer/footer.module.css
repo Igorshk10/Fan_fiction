@@ -1,10 +1,8 @@
 .footer {
     background-color: var(--white-dark);
-    border-top: 1px solid #d7d7d7;
-    margin-top: 80px;
+    box-shadow: 0 0 10px 3px var(--shadow);
     padding: 60px 80px 30px;
     font-family: var(--main-font);
-    box-shadow: 0 0 10px 3px #e4e4e4;
 }
 
 .container {
