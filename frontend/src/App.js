@@ -16,12 +16,12 @@ import {Toaster} from "react-hot-toast";
 function App() {
   const [data, setData] = useState(null);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/test")
-        .then((res) => res.json())
-        .then((data) => setData(data))
-        .catch((err) => console.error("Error fetching backend:", err));
-  }, []);
+      useEffect(() => {
+        fetch("http://localhost:5000/test")
+            .then((res) => res.json())
+            .then((data) => setData(data))
+            .catch((err) => console.error("Error fetching backend:", err));
+      }, []);
 
   return (
       <LanguageProvider>
