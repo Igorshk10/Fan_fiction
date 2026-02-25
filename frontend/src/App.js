@@ -10,6 +10,8 @@ import FanficsPage from "./pages/FanficsPage";
 import Footer from "./components/Footer/Footer";
 import AuthPage from "./pages/AuthPage";
 import MainLayout from "./layouts/MainLayout";
+import CreateStoryPage from "./pages/CreateStoryPage";
+import {Toaster} from "react-hot-toast";
 
 function App() {
   const [data, setData] = useState(null);
@@ -25,11 +27,19 @@ function App() {
       <LanguageProvider>
         <ThemeProvider>
           <BrowserRouter>
-            {<h1>{data ? JSON.stringify(data.message) : "Loading..."}</h1>}
+            {/*{<h1>{data ? JSON.stringify(data.message) : "Loading..."}</h1>}*/}
+
+              <Toaster position="bottom-right"
+                       toastOptions={{
+                           style: {
+                               fontFamily: '"Nunito", sans-serif'
+                           },
+                       }}/>
               <Routes>
                   <Route element={<MainLayout />}>
                       <Route path="/" element={<MainPage />} />
                       <Route path="/fanfics" element={<FanficsPage />} />
+                      <Route path="/story/create" element={<CreateStoryPage />} />
                   </Route>
 
 
