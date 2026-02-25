@@ -21,13 +21,5 @@
   "homepage": "https://github.com/Igorshk10/Fan_fiction#readme",
   "devDependencies": {
     "concurrently": "^9.2.1"
-  },
-  "dependencies": {
-    "@google/genai": "^1.42.0",
-    "@nestjs/passport": "^11.0.5",
-    "dotenv": "^17.3.1",
-    "p-retry": "^4.6.2",
-    "passport": "^0.7.0",
-    "passport-jwt": "^4.0.1"
   }
 }
