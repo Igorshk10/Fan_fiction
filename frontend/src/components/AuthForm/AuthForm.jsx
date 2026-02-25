@@ -2,10 +2,57 @@ import React, {useState} from "react";
 import style from "./AuthForm.module.css";
 import {useTranslation} from "react-i18next";
 import MyInput from "../../UI/MyInput/MyInput";
+import toast from "react-hot-toast";
 
 function AuthForm() {
     const [active, setActive] = useState(false);
     const { t } = useTranslation();
+
+    const [loginUsername, setLoginUsername] = useState("");
+    const [loginPassword, setLoginPassword] = useState("");
+
+
+    const [registerUsername, setRegisterUsername] = useState("");
+    const [registerEmail, setRegisterEmail] = useState("");
+    const [registerPassword, setRegisterPassword] = useState("");
+
+
+    const handleLoginSubmit = (e) => {
+        e.preventDefault();
+
+        if (!loginUsername || !loginPassword) {
+            console.log("All fields are required");
+            toast.error("All fields are required");
+            return;
+        }
+
+        const userData = {
+            username: loginUsername,
+            password: loginPassword
+        };
+
+        toast.success("Login successful!");
+        console.log("Login:", userData);
+    };
+
+    const handleRegisterSubmit = (e) => {
+        e.preventDefault();
+
+        if (!registerUsername || !registerEmail || !registerPassword) {
+            console.log("All fields are required");
+            toast.error("All fields are required");
+            return;
+        }
+
+        const userData = {
+            username: registerUsername,
+            email: registerEmail,
+            password: registerPassword
+        };
+
+        toast.success("Registration successful!");
+        console.log("Register:", userData);
+    };
 
     return (
         <div className={style.authWrapper}>
@@ -15,15 +62,23 @@ function AuthForm() {
                     <form>
                         <h1 className={style.bold}>{t("auth.loginForm.login")}</h1>
 
-                        <MyInput  type="text"
-                                  placeholder={t("auth.placeholders.username")}
-                                  required={true}
-                                  icon={<i className="bx bxs-user"></i>} />
+                        <MyInput
+                            type="text"
+                            placeholder={t("auth.placeholders.username")}
+                            required
+                            icon={<i className="bx bxs-user"></i>}
+                            value={loginUsername}
+                            onChange={(e) => setLoginUsername(e.target.value)}
+                        />
 
-                        <MyInput  type="password"
-                                  placeholder={t("auth.placeholders.password")}
-                                  required={true}
-                                  icon={<i className="bx bxs-lock-alt"></i>} />
+                        <MyInput
+                            type="password"
+                            placeholder={t("auth.placeholders.password")}
+                            required
+                            icon={<i className="bx bxs-lock-alt"></i>}
+                            value={loginPassword}
+                            onChange={(e) => setLoginPassword(e.target.value)}
+                        />
 
                         <div className={style.forgotLink}>
                             <a href="#" className={style.forgotPassword}>
@@ -31,7 +86,7 @@ function AuthForm() {
                             </a>
                         </div>
 
-                        <button type="submit" className={style.btn}>
+                        <button type="submit" className={style.btn} onClick={handleLoginSubmit}>
                             {t("auth.loginForm.login")}
                         </button>
 
@@ -51,22 +106,34 @@ function AuthForm() {
                             {t("auth.registrationForm.registration")}
                         </h1>
 
-                        <MyInput  type="text"
-                                  placeholder={t("auth.placeholders.username")}
-                                  required={true}
-                                  icon={<i className="bx bxs-user"></i>} />
+                        <MyInput
+                            type="text"
+                            placeholder={t("auth.placeholders.username")}
+                            required
+                            icon={<i className="bx bxs-user"></i>}
+                            value={registerUsername}
+                            onChange={(e) => setRegisterUsername(e.target.value)}
+                        />
 
-                        <MyInput  type="email"
-                                  placeholder={t("auth.placeholders.email")}
-                                  required={true}
-                                  icon={<i className="bx bxs-envelope-open bx-flip-horizontal"></i>} />
+                        <MyInput
+                            type="email"
+                            placeholder={t("auth.placeholders.email")}
+                            required
+                            icon={<i className="bx bxs-envelope-open bx-flip-horizontal"></i>}
+                            value={registerEmail}
+                            onChange={(e) => setRegisterEmail(e.target.value)}
+                        />
 
-                        <MyInput  type="password"
-                                  placeholder={t("auth.placeholders.password")}
-                                  required={true}
-                                  icon={<i className="bx bxs-lock-alt"></i>} />
+                        <MyInput
+                            type="password"
+                            placeholder={t("auth.placeholders.password")}
+                            required
+                            icon={<i className="bx bxs-lock-alt"></i>}
+                            value={registerPassword}
+                            onChange={(e) => setRegisterPassword(e.target.value)}
+                        />
 
-                        <button type="submit" className={style.btn}>
+                        <button type="submit" className={style.btn} onClick={handleRegisterSubmit}>
                             {t("auth.registrationForm.register")}
                         </button>
 

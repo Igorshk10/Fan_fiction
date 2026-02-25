@@ -10,6 +10,7 @@
     "i18next": "^21.10.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "react-hot-toast": "^2.6.0",
     "react-i18next": "^11.18.5",
     "react-router-dom": "^7.13.0",
     "react-scripts": "5.0.1",
